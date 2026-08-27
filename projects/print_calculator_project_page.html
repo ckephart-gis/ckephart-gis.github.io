@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- PAGE METADATA -->
+<title>3D Print Cost Calculator | Chris Kephart</title>
+<meta name="description" content="An interactive tool for pricing custom 3D print orders: material cost by color, electricity, machine wear, waste buffer, and four pricing models including a friends and family rate.">
+<meta name="author" content="Christopher Kephart">
+<link rel="canonical" href="https://ckephart-gis.github.io/projects/print-cost-calculator.html">
+
+<!-- OPEN GRAPH / SOCIAL -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="3D Print Cost Calculator">
+<meta property="og:description" content="Interactive material, electricity, and pricing calculator for 3D print orders, built with vanilla HTML/JS.">
+<meta property="og:url" content="https://ckephart-gis.github.io/projects/print-cost-calculator.html">
+<meta property="og:site_name" content="Chris Kephart Portfolio">
+
+<style>
+  :root{
+    /* Okabe-Ito ADA-compliant palette, matched to site standard */
+    --ok-black:#000000;
+    --ok-orange:#E69F00;
+    --ok-sky:#56B4E9;
+    --ok-green:#009E73;
+    --ok-yellow:#F0E442;
+    --ok-blue:#0072B2;
+    --ok-vermillion:#D55E00;
+    --ok-purple:#CC79A7;
+
+    --bg:#14171c;
+    --panel:#1c2028;
+    --line:#2c3038;
+    --text:#e8eaed;
+    --text-dim:#9aa1ac;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,'Segoe UI',sans-serif;
+    line-height:1.6;
+  }
+  .topo-header{
+    background:
+      repeating-linear-gradient(
+        transparent, transparent 18px,
+        rgba(86,180,233,0.08) 19px, rgba(86,180,233,0.08) 20px
+      ),
+      linear-gradient(160deg, #10141a 0%, #1c2536 100%);
+    border-bottom:2px solid var(--ok-blue);
+    padding:48px 24px 32px;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ok-sky);
+    margin:0 0 8px 0;
+  }
+  h1{font-size:28px;margin:0 0 10px 0;}
+  .lede{color:var(--text-dim);font-size:15px;max-width:640px;margin:0;}
+
+  .content{padding:36px 0 60px;}
+  section{margin-bottom:32px;}
+  h2{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ok-orange);
+    border-bottom:1px solid var(--line);
+    padding-bottom:8px;
+    margin-bottom:14px;
+  }
+  p{color:var(--text);font-size:15px;}
+  ul{padding-left:20px;}
+  li{margin-bottom:6px;font-size:15px;}
+
+  .stack-list{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
+  .stack-list li{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:5px 11px;
+    font-size:13px;
+    color:var(--ok-sky);
+    margin:0;
+  }
+
+  .feature-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .feature{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--ok-green);
+    border-radius:6px;
+    padding:14px 16px;
+  }
+  .feature h3{font-size:14px;margin:0 0 6px 0;color:var(--text);}
+  .feature p{font-size:13.5px;color:var(--text-dim);margin:0;}
+
+  .cta{
+    display:inline-block;
+    background:var(--ok-blue);
+    color:#fff;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:5px;
+    font-size:14px;
+    font-weight:600;
+  }
+  .cta:hover{background:var(--ok-sky);}
+
+  @media(max-width:600px){.feature-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+  <div class="topo-header">
+    <div class="wrap">
+      <p class="eyebrow">Tool / Web App</p>
+      <h1>3D Print Cost Calculator</h1>
+      <p class="lede">
+        A single-file HTML/JS calculator for pricing custom 3D print orders,
+        built to cost out multi-color print jobs on a Bambu P1S and compare
+        four different pricing strategies before quoting a customer or a friend.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap content">
+
+    <section>
+      <h2>Overview</h2>
+      <p>
+        This tool grew out of pricing custom print orders (novelty ducks, coins,
+        and keepsake models) where each job uses several filament colors at
+        different price points. It rolls material, electricity, waste, and
+        machine wear into one per-unit cost, then lets that cost feed into
+        whichever pricing model fits the situation: raw cost, cost plus labor,
+        a retail markup, or a lighter friends-and-family rate.
+      </p>
+    </section>
+
+    <section>
+      <h2>Stack</h2>
+      <ul class="stack-list">
+        <li>HTML5</li>
+        <li>CSS (custom properties)</li>
+        <li>Vanilla JavaScript</li>
+        <li>No build step / no dependencies</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Key features</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Per-color material cost</h3>
+          <p>Add any number of filament colors with weight and price per kg; totals sum automatically.</p>
+        </div>
+        <div class="feature">
+          <h3>Electricity and wear</h3>
+          <p>Print time converts to hours, applied against configurable electricity and machine wear rates.</p>
+        </div>
+        <div class="feature">
+          <h3>Four pricing models</h3>
+          <p>Cost only, cost plus labor, retail markup multiplier, and a friends and family range.</p>
+        </div>
+        <div class="feature">
+          <h3>Multi-print orders</h3>
+          <p>Save several print jobs into one order and see a combined grand total under the active pricing model.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Try it</h2>
+      <p>The calculator runs entirely client-side, no data leaves the page.</p>
+      <a class="cta" href="/tools/print_cost_calculator.html">Open the calculator</a>
+    </section>
+
+  </div>
+
+</body>
+</html>
