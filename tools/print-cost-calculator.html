@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Print Cost Calculator - Chris Kephart, GISP</title>
+<meta name="description" content="An interactive tool for pricing custom 3D print orders: material cost by color, electricity, machine wear, waste buffer, and four pricing models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="chart-frame">
+  <nav class="wrap">
+    <a href="../index.html" class="brand" style="text-decoration:none;">
+      <svg class="compass" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="#1F2A24" stroke-width="1.5"/>
+        <path d="M12 4L14 12L12 20L10 12L12 4Z" fill="#954200"/>
+      </svg>
+      C. KEPHART, GISP
+    </a>
+    <div class="nav-links">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#leadership">Leadership</a>
+      <a href="../projects/index.html">Projects</a>
+      <a href="../tools/index.html">Tools</a>
+      <a href="../teaching/index.html">Teaching</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+</div>
+
+<div class="project-hero wrap">
+  <a href="index.html" class="back-link">← Back to Tools</a>
+  <h1>3D Print Cost Calculator</h1>
+  <p class="lede" style="max-width: 68ch; font-size: 1.05rem;">A single-file, client-side calculator for pricing custom 3D print orders, built to cost out multi-color print jobs and compare pricing strategies before quoting a customer or a friend.</p>
+  <div class="meta-strip">
+    <div>TYPE<span>Tool / Web App</span></div>
+    <div>STACK<span>HTML, CSS, Vanilla JS</span></div>
+    <div>DEPENDENCIES<span>None, no build step</span></div>
+    <div>CONTEXT<span>3D print shop, Bambu P1S</span></div>
+  </div>
+</div>
+
+<div class="wrap project-body" style="max-width: 90ch;">
+
+  <h2>Overview</h2>
+  <p>This tool grew out of pricing custom print orders, novelty models, coins, and keepsake pieces, where each job uses several filament colors at different price points. It rolls material cost, electricity, waste, and machine wear into one per-unit cost, then feeds that cost into whichever pricing model fits the situation: raw cost, cost plus labor, a retail markup, or a lighter friends-and-family rate.</p>
+
+  <h2>Key Features</h2>
+  <div class="leadership-grid" style="margin-top:16px;">
+    <div class="leadership-card">
+      <span class="role-tag">Material</span>
+      <h3>Per-Color Cost</h3>
+      <p>Add any number of filament colors with weight and price per kg, totals sum automatically.</p>
+    </div>
+    <div class="leadership-card">
+      <span class="role-tag">Overhead</span>
+      <h3>Electricity &amp; Wear</h3>
+      <p>Print time converts to hours, applied against configurable electricity and machine wear rates.</p>
+    </div>
+    <div class="leadership-card">
+      <span class="role-tag">Pricing</span>
+      <h3>Four Pricing Models</h3>
+      <p>Cost only, cost plus labor, a retail markup multiplier, and a friends-and-family range.</p>
+    </div>
+    <div class="leadership-card">
+      <span class="role-tag">Orders</span>
+      <h3>Multi-Print Orders</h3>
+      <p>Save several print jobs into one order and see a combined grand total under the active pricing model.</p>
+    </div>
+  </div>
+
+  <h2>Try It</h2>
+  <p>The calculator runs entirely client-side, no data leaves the page. It's embedded live below with its own interface, distinct from the rest of this site since it's a standalone tool.</p>
+  <iframe src="print-cost-calculator-app.html" title="3D Print Cost Calculator" style="width:100%; height:900px; border:var(--border-hairline); margin:16px 0;"></iframe>
+  <p><a href="print-cost-calculator-app.html" target="_blank" rel="noopener" class="btn btn-outline">Open in a new tab</a></p>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <h2>Contact</h2>
+    <a href="../contact.html" class="btn" style="margin-top:16px;">Get In Touch</a>
+  </div>
+</footer>
+
+</body>
+</html>
